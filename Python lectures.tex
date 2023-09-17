@@ -336,4 +336,114 @@ MRO класса можно просмотреть в атрибуте \_\_mro\_
 1   isinstance(object, type)
 \end{verbatim}
 
+\subsection{Исключения}
+
+При обработке исключений также можно использовать необязательный блок finally. Отличительной особенностью этого блока является то, что он выполняется вне зависимости, было ли сгенерировано исключение.
+
+\begin{verbatim}
+1    try:
+2        number = int(input("Введите число: "))
+3        print("Введенное число:", number)
+4    except:
+5        print("Преобразование прошло неудачно")
+6    finally:
+7        print("Блок try завершил выполнение")
+\end{verbatim}
+
+В Python есть следующие базовые типы исключений:
+
+\begin{itemize}
+    \item BaseException: базовый тип для всех встроенных исключений
+    \item Exception: базовый тип, который обычно применяется для создания своих типов исключений
+    \item ArithmeticError: базовый тип для исключений, связанных с арифметическими операциями (OverflowError, ZeroDivisionError, FloatingPointError).
+    \item BufferError: тип исключения, которое возникает при невозможности выполнить операцию с буффером
+    \item LookupError: базовый тип для исключений, которое возникают при обращении в коллекциях по некорректному ключу или индексу (например, IndexError, KeyError)
+\end{itemize}
+
+\newpage
+
+И если ситуация такова, что в программе могут быть сгенерированы различные типы исключений, то мы можем их обработать по отдельности, используя дополнительные выражения except. И при возникновении исключения Python будет искать нужный блок except, который обрабатывает данный тип исключения:
+
+\begin{verbatim}
+1     try:
+2         number1 = int(input("Введите первое число: "))
+3         number2 = int(input("Введите второе число: "))
+4         print("Результат деления:", number1/number2)
+5     except ValueError:
+6         print("Преобразование прошло неудачно")
+7     except ZeroDivisionError:
+8         print("Попытка деления числа на ноль")
+9     except BaseException:
+10        print("Общее исключение")
+\end{verbatim}
+
+Python позволяет в одном блоке except обрабатывать сразу несколько типов исключений. В этом случае все типы исключения передаются в скобках:
+
+\begin{verbatim}
+1    try:
+2        number1 = int(input("Введите первое число: "))
+3        number2 = int(input("Введите второе число: "))
+4        print("Результат деления:", number1/number2)
+5    except (ZeroDivisionError, ValueError):    
+6        #  обработка двух типов исключений - 
+7        #  ZeroDivisionError и ValueError
+8        print("Деление числа на ноль или некорректный ввод")
+\end{verbatim}
+
+С помощью оператора as мы можем передать всю информацию об исключении в переменную, которую затем можно использовать в блоке except:
+
+\begin{verbatim}
+1    try:
+2        number = int(input("Введите число: "))
+3        print("Введенное число:", number)
+4    except ValueError as e:
+5        print("Сведения об исключении", e)
+\end{verbatim}
+
+\newpage
+
+Иногда возникает необходимость вручную сгенерировать то или иное исключение. Для этого применяется оператор raise. Например, сгенерируем исключение:
+
+\begin{verbatim}
+1     try:
+2         number1 = int(input("Введите первое число: "))
+3         number2 = int(input("Введите второе число: "))
+4         if number2 == 0:
+5             raise Exception("Второе число не 0")
+6         print("Результат деления двух чисел:", number1/number2)
+7     except ValueError:
+8         print("Введены некорректные данные")
+9     except Exception as e:
+10        print(e)
+\end{verbatim}
+
+Оператору raise передается объект BaseException - в данном случае объект Exception. В конструктор этого типа можно ему передать сообщение, которое затем можно вывести пользователю. В итоге, если number2 будет равно 0, то сработает оператор raise, который сгенерирует исключение. В итоге управление программой перейдет к блоку except, который обрабатывает исключения типа Exception.
+
+\begin{verbatim}
+1     class PersonAgeException(Exception):
+2         def __init__(self, age, minage, maxage):
+3             self.age = age
+4             self.minage = minage
+5             self.maxage = maxage
+6     
+7         def __str__(self):
+8             return f"Недопустимое значение: {self.age}. " \
+9                 f"Возраст в диапазоне от {self.minage} до {self.maxage}"
+10 
+11    class Person:
+12        def __init__(self, name, age):
+13            self.__name = name  # устанавливаем имя
+14            minage, maxage = 1, 110
+15            if minage < age < maxage:   
+16                # устанавливаем возраст, если корректное значение
+17                self.__age = age
+18            else:                       
+19                # иначе генерируем исключение
+20                raise PersonAgeException(age, minage, maxage)
+\end{verbatim}
+
+В начале здесь определен класс PersonAgeException, который наследуется от класса Exception. Как правило, собственные классы исключений наследуются от класса Exception. Класс PersonAgeException предназначен для исключений, связанных с возрастом пользователя.
+
+
+
 \end{document}
