@@ -4,3 +4,5 @@ Python lectures.fls
 Python lectures.log
 Python lectures.out
 Python lectures.synctex.gz
+**/.idea
+**/__pycache__

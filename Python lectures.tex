@@ -476,4 +476,34 @@ Python позволяет в одном блоке except обрабатыват
 
 Когда мы хотим складывать данные с разными типами, мы используем кортеж.
 
+Ключи словаря хранятся во множестве. Отличие словаря от множества в том, что при хранении ключа во множестве также хранится ссылка на объект. 
+
+\subsection{Работа со списками}
+
+Списки нужно использовать для:
+\begin{itemize}
+    \item list comprehention
+    \item filter, map, reduce
+\end{itemize}
+
+\begin{verbatim}
+1    xs = [int(input()) for _ in range(15)]
+2    xs = {int(input()) for _ in range(15)}
+3    xs = tuple(int(input()) for _ in range(15))
+4    xs = {i: int(input()) for _ in range(15)}
+\end{verbatim}
+
+Использование map допускается только для задач, в которых необходимо преобразовать каждый элемент в списке.
+
+\subsection{Tkinter}
+
+На tkinter пишутся небольшие программы, есть 2 подхода:
+
+\begin{itemize}
+    \item С классами
+    \item Без классов
+\end{itemize}
+
+
+
 \end{document}
