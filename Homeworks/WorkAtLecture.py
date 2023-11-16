@@ -46,7 +46,7 @@ class StartFrame(tk.Frame):
                 if right_border - left_border > 100:
                     messagebox.showinfo("Info", "Диапазон больше 100")
 
-                messagebox.showinfo("Случайное число", str(random.randint(left_border, right_border)))
+                messagebox.showinfo("Случайное числа", str(sorted([random.randint(left_border, right_border) for _ in range(6)])))
 
             except ValueError:
                 messagebox.showerror("Error", "Введите натуральные числа!")
