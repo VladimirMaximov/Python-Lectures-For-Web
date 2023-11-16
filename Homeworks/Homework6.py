@@ -152,13 +152,13 @@ def main():
     except ValueError:
         print("Необходимо вводить числа вида 4, -5.0, 0.3 через пробел")
 
-# def test_minDisc():
-#     assert minDisc([Point(0, 0)]) == Disc(Point(0, 0), 0)
-#     assert minDisc([Point(0, 0), Point(2, 0)]) == Disc(Point(1, 0), 1)
-#     assert minDisc([Point(1, 1), Point(-1, 1), Point(1, -1), Point(-1, -1)]) == Disc(Point(0, 0), 2**0.5)
-#     assert minDisc([Point(1, 1), Point(-1, 1), Point(1, -1), Point(-1, -1), Point(0, 0)]) == Disc(Point(0, 0), 2**0.5)
-#     assert minDisc([Point(5.2, 6.2), Point(5, 6), Point(4.7, 5.7),
-#                     Point(4, 6), Point(5, 7), Point(6, 6)]) == Disc(Point(5, 6), 1)
+def test_minDisc():
+    assert minDisc([Point(0, 0)]) == Disc(Point(0, 0), 0)
+    assert minDisc([Point(0, 0), Point(2, 0)]) == Disc(Point(1, 0), 1)
+    assert minDisc([Point(1, 1), Point(-1, 1), Point(1, -1), Point(-1, -1)]) == Disc(Point(0, 0), 2**0.5)
+    assert minDisc([Point(1, 1), Point(-1, 1), Point(1, -1), Point(-1, -1), Point(0, 0)]) == Disc(Point(0, 0), 2**0.5)
+    assert minDisc([Point(5.2, 6.2), Point(5, 6), Point(4.7, 5.7),
+                    Point(4, 6), Point(5, 7), Point(6, 6)]) == Disc(Point(5, 6), 1)
 
 # [Point(x=89, y=198), Point(x=346, y=274), Point(x=410, y=180)]
 # Окружность с центром в Point(x=217.5, y=236.0) и радиусом 134.00093283257397.
